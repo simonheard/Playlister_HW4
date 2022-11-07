@@ -35,7 +35,9 @@ export default function MUIRemoveSongModal() {
     if (store.currentSong) {
         songTitle = store.currentSong.title;
     }
-
+    if(store.listMarkedForDeletion !== null){
+        console.log("MODAL should open");
+    }
     return (
         <Modal
             open={store.listMarkedForDeletion !== null}

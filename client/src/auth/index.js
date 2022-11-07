@@ -70,15 +70,20 @@ function AuthContextProvider(props) {
     }
 
     auth.registerUser = async function(firstName, lastName, email, password, passwordVerify) {
-        const response = await api.registerUser(firstName, lastName, email, password, passwordVerify);      
-        if (response.status === 200) {
-            authReducer({
-                type: AuthActionType.REGISTER_USER,
-                payload: {
-                    user: response.data.user
-                }
-            })
-            history.push("/login");
+        const response = await api.registerUser(firstName, lastName, email, password, passwordVerify)
+        .catch((err)=>{
+            console.log(err.response.data.errorMessage);
+        });
+        if(response){
+            if (response.status === 200) {
+                authReducer({
+                    type: AuthActionType.REGISTER_USER,
+                    payload: {
+                        user: response.data.user
+                    }
+                })
+                history.push("/login");
+            }
         }
     }
 
