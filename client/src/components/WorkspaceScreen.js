@@ -25,6 +25,7 @@ function WorkspaceScreen() {
         modalJSX = <MUIRemoveSongModal />;
     }
     return (
+        <div  id="top5-workspace">
         <Box>
         <List 
             id="playlist-cards" 
@@ -43,6 +44,7 @@ function WorkspaceScreen() {
          </List>            
          { modalJSX }
          </Box>
+         </div>
     )
 }
 
