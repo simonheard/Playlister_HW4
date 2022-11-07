@@ -35,7 +35,6 @@ function SongCard(props) {
     }
     function handleRemoveSong(event) {
         event.stopPropagation();
-        console.log("BUTTON CLICKED");
         store.showRemoveSongModal(index, song);
     }
     function handleClick(event) {

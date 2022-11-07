@@ -342,7 +342,6 @@ function GlobalStoreContextProvider(props) {
         });        
     }
     store.showRemoveSongModal = (songIndex, songToRemove) => {
-        //console.log("BUTTON CLICKED");
         storeReducer({
             type: GlobalStoreActionType.REMOVE_SONG,
             payload: {currentSongIndex: songIndex, currentSong: songToRemove}

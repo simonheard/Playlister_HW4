@@ -3,6 +3,7 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { Typography } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -49,19 +50,12 @@ export default function MUIEditSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.currentSong !== null}
         >
             <Box sx={style}>
-            <div
-            id="edit-song-modal"
-            className="modal is-visible"
-            data-animation="slideInOutLeft">
-            <div
-                id='edit-song-root'
-                className="modal-root">
-                <div
-                    id="edit-song-modal-header"
-                    className="modal-north">Edit Song</div>
+                <Typography variant="h6" component="h2">
+                    Edit Song
+                </Typography>
                 <div
                     id="edit-song-modal-content"
                     className="modal-center">
@@ -87,22 +81,18 @@ export default function MUIEditSongModal() {
                         defaultValue={youTubeId} 
                         onChange={handleUpdateYouTubeId} />
                 </div>
-                <div className="modal-south">
-                    <input 
-                        type="button" 
-                        id="edit-song-confirm-button" 
-                        className="modal-button" 
-                        value='Confirm' 
-                        onClick={handleConfirmEditSong} />
-                    <input 
-                        type="button" 
-                        id="edit-song-cancel-button" 
-                        className="modal-button" 
-                        value='Cancel' 
-                        onClick={handleCancelEditSong} />
-                </div>
-            </div>
-        </div>
+                <input 
+                    type="button" 
+                    id="edit-song-confirm-button" 
+                    className="modal-button" 
+                    value='Confirm' 
+                    onClick={handleConfirmEditSong} />
+                <input 
+                    type="button" 
+                    id="edit-song-cancel-button" 
+                    className="modal-button" 
+                    value='Cancel' 
+                    onClick={handleCancelEditSong} />
             </Box>
         </Modal>
     );

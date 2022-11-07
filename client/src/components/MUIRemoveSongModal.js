@@ -3,6 +3,7 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { Typography } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -35,28 +36,19 @@ export default function MUIRemoveSongModal() {
     if (store.currentSong) {
         songTitle = store.currentSong.title;
     }
-    if(store.listMarkedForDeletion !== null){
-        console.log("MODAL should open");
-    }
+
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={store.currentSong !== null}
+            onClose={handleCancelRemoveSong}
         >
             <Box sx={style}>
-            <div
-        id="remove-song-modal"
-        className={modalClass}
-        data-animation="slideInOutLeft">
-        <div className="modal-root" id='verify-remove-song-root'>
-            <div className="modal-north">
-                Remove {songTitle}?
-            </div>
-            <div className="modal-center">
-                <div className="modal-center-content">
+                <Typography variant="h6" component="h2">
+                    Remove {songTitle}?
+                </Typography>
+                <Typography  sx={{ mt: 2 }}>
                     Are you sure you wish to permanently remove {songTitle} from the playlist?
-                </div>
-            </div>
-            <div className="modal-south">
+                </Typography>
                 <input type="button" 
                     id="remove-song-confirm-button" 
                     className="modal-button" 
@@ -68,9 +60,6 @@ export default function MUIRemoveSongModal() {
                     className="modal-button" 
                     onClick={handleCancelRemoveSong} 
                     value='Cancel' />
-            </div>
-        </div>
-    </div>
             </Box>
         </Modal>
     );
