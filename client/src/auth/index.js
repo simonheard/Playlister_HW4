@@ -10,13 +10,15 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
-    REGISTER_USER: "REGISTER_USER"
+    REGISTER_USER: "REGISTER_USER",
+    SET_ERROR_MESSAGE: "SET_ERROR_MESSAGE"
 }
 
 function AuthContextProvider(props) {
     const [auth, setAuth] = useState({
         user: null,
-        loggedIn: false
+        loggedIn: false,
+        errMsg: ""
     });
     const history = useHistory();
 
@@ -51,6 +53,13 @@ function AuthContextProvider(props) {
                     loggedIn: true
                 })
             }
+            case AuthActionType.SET_ERROR_MESSAGE: {
+                return setAuth({
+                    user: auth.user,
+                    loggedIn: auth.loggedIn,
+                    errMsg: payload
+                })
+            }
             default:
                 return auth;
         }
@@ -73,6 +82,7 @@ function AuthContextProvider(props) {
         const response = await api.registerUser(firstName, lastName, email, password, passwordVerify)
         .catch((err)=>{
             console.log(err.response.data.errorMessage);
+            auth.setErrMsg(err.response.data.errorMessage);
         });
         if(response){
             if (response.status === 200) {
@@ -85,6 +95,13 @@ function AuthContextProvider(props) {
                 history.push("/login");
             }
         }
+    }
+
+    auth.setErrMsg = function (msg) {
+        authReducer({
+            type: AuthActionType.SET_ERROR_MESSAGE,
+            payload: msg
+        })
     }
 
     auth.loginUser = async function(email, password) {

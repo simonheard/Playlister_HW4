@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 import { GlobalStoreContext } from '../store'
+
+import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -50,12 +52,13 @@ function EditToolbar() {
                 variant="contained">
                     <RedoIcon />
             </Button>
+            
             <Button 
                 disabled={!store.canClose()}
                 id='close-button'
-                onClick={handleClose}
+                
                 variant="contained">
-                    <CloseIcon />
+                    <Link style={{ color: 'white' }} to='/'><CloseIcon /></Link>
             </Button>
         </div>
     )

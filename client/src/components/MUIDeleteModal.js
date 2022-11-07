@@ -3,7 +3,7 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -38,16 +38,12 @@ export default function MUIDeleteModal() {
                 <Typography variant="h6" component="h2">
                     Delete the {name} Playlist?
                 </Typography>
-                <button
-                    id="dialog-yes-button"
-                    className="modal-button"
+                <Button
                     onClick={handleDeleteList}
-                >Confirm</button>
-                <button
-                    id="dialog-no-button"
-                    className="modal-button"
+                >Confirm</Button>
+                <Button
                     onClick={handleCloseModal}
-                >Cancel</button>
+                >Cancel</Button>
             </Box>
         </Modal>
     );
